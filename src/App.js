@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button } from '@material-ui/core';
+import { Box, TextField } from '@material-ui/core';
+import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
 import './App.css';
 
@@ -59,21 +60,31 @@ function App() {
       headerName: "Meal Name",
       width: 100,
       align: "left",
-      flex: 4,
-      editable: true
+      flex: 4
     },
     {
       field: "calorieCount",
       headerName: "Calories",
       width: 100,
       align: "left",
+      flex: 4
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 100,
+      align: "left",
       flex: 4,
-      editable: true
+      sortable: false,
+      renderCell: (params) => (
+        <Button variant="outlined" color="error" onClick={() => handleDeleteMeal()}>Delete</Button>
+      )
     }
   ];
 
 
   let newId = 0;
+  let button = '';
   const rows = meals?.map((row) => {
     newId += 1;
 
@@ -82,6 +93,7 @@ function App() {
       mealName: `${row.name}`,
       calorieCount: row.calories
     };
+
   });
 
 
@@ -138,7 +150,7 @@ function MealsData() {
         </Box>
       }
 
-      <MealsData/>
+      { /* <MealsData/> */ }
 
       </div>
       <div>
